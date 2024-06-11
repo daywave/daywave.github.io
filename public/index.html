@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>literally me</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        #roulette {
+            width: 300px;
+            height: 300px;
+            background-size: cover;
+            border: 5px solid #000;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>by: ddaywave</h1>
+    <div id="roulette"></div>
+    <button onclick="startRoulette()">who am i?</button>
+
+    <script>
+        const roulette = document.getElementById('roulette');
+        let interval;
+        const imageLinks = [
+            'https://i.pinimg.com/564x/d3/38/72/d33872e667d92261e5a8cb628975c3cc.jpg',
+            'https://i.pinimg.com/564x/a9/a1/07/a9a1079c4be73115cf31b717f31a7b73.jpg',
+            'https://i.pinimg.com/564x/92/e8/e5/92e8e5ac16f4f49584a0f1e4ec1b1eb4.jpg',
+            'https://i.pinimg.com/564x/0d/ce/c4/0dcec4cc803de44e2449608a6355d00b.jpg',
+            'https://i.pinimg.com/736x/96/46/7f/96467f0c09d9834ccc1afb48e9c591f1.jpg',
+            'https://i.pinimg.com/564x/cd/8a/83/cd8a8351724f568dba830b3e13538933.jpg',
+            'https://i.pinimg.com/564x/93/13/0f/93130fcdfc9d509b680f990265c5b75c.jpg',
+            'https://i.pinimg.com/564x/3f/49/a3/3f49a30c6c22a923b776c8b0b862dfe2.jpg',
+            'https://i.pinimg.com/564x/50/d2/7b/50d27b91aaae651ae01d73b30e8cd4d2.jpg'
+        ];
+
+        function startRoulette() {
+            if (interval) {
+                clearInterval(interval);
+            }
+
+            let index = 0;
+            let usedIndexes = [];
+
+            interval = setInterval(() => {
+                if (usedIndexes.length === imageLinks.length) {
+                    usedIndexes = [];
+                }
+
+                do {
+                    index = Math.floor(Math.random() * imageLinks.length);
+                } while (usedIndexes.includes(index));
+
+                usedIndexes.push(index);
+                roulette.style.backgroundImage = `url(${imageLinks[index]})`;
+            }, 100);
+
+            const randomTimeout = Math.floor(Math.random() * 5000) + 10000; // Entre 10 y 15 segundos
+
+            setTimeout(() => {
+                clearInterval(interval);
+                const finalIndex = Math.floor(Math.random() * imageLinks.length);
+                roulette.style.backgroundImage = `url(${imageLinks[finalIndex]})`;
+            }, randomTimeout);
+        }
+    </script>
+</body>
+</html>
