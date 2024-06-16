@@ -24,3 +24,7 @@ app.get('/random-image', (req, res) => {
     const randomIndex = Math.floor(Math.random() * imageLinks.length);
     res.send({ imageUrl: imageLinks[randomIndex] });
 });
+
+app.listen(port, () => {
+    console.log(`Listening on port: ${port}`);
+});
